@@ -1,8 +1,8 @@
-# Martian Robots
+# Martian Robots 🪐
 
-## The Martian robot controller
-
-Composición del proyecto:
+Este programa determina cada posición de los robots introducidos y su posición final.  
+Se compone de dos partes principales:
+## 1. Proceso de desarrollo
 
 1. Especificación de requisitos y análisis.
 2. Diseño de la arquitectura.
@@ -13,4 +13,21 @@ Composición del proyecto:
 7. Desplegar REST API.
 8. Deployment en nube (`AWS`).
 9. Planteamiento de ejecución serverless.
+
+## 2. Instrucciones para su ejecución
+
+*-------------------------------------------------------------------------*
+
+## *1. Proceso de desarrollo*
+
+
+
+
+
+
+
+
+
+
+
 
