@@ -674,6 +674,45 @@
 							"nameCompartment": {
 								"$ref": "AAAAAAF8DUkpaLmuBc0="
 							}
+						},
+						{
+							"_type": "UMLTextView",
+							"_id": "AAAAAAF8DXildLnLKk0=",
+							"_parent": {
+								"$ref": "AAAAAAFFxl+07j9sxXU="
+							},
+							"font": "Arial;13;0",
+							"left": 456,
+							"top": 432,
+							"width": 89,
+							"height": 25,
+							"text": "Robot Model"
+						},
+						{
+							"_type": "UMLTextView",
+							"_id": "AAAAAAF8DXkZ2rnUc2w=",
+							"_parent": {
+								"$ref": "AAAAAAFFxl+07j9sxXU="
+							},
+							"font": "Arial;13;0",
+							"left": 592,
+							"top": 144,
+							"width": 113,
+							"height": 25,
+							"text": "Request Handler"
+						},
+						{
+							"_type": "UMLTextView",
+							"_id": "AAAAAAF8DXlyr7nelF8=",
+							"_parent": {
+								"$ref": "AAAAAAFFxl+07j9sxXU="
+							},
+							"font": "Arial;13;0",
+							"left": 440,
+							"top": 664,
+							"width": 118,
+							"height": 25,
+							"text": "Robot Persistance"
 						}
 					]
 				},
