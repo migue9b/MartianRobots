@@ -21,7 +21,7 @@ Se compone de dos partes principales:
 ## *1. Proceso de desarrollo*
 
 #### 1. Especificación de requisitos y análisis
-**Casos de Uso:**
+##### **Casos de Uso:**
 
 | Caso de Uso | Descripción |
 | ------------- | ------------- |
@@ -31,7 +31,7 @@ Se compone de dos partes principales:
 | **CU-4:** Consultar robots | El usuario puede consultar los robots del sistema |
 | **CU-4-ext:** Consultar robots perdidos | El usuario puede consultar los robots marcados con la etiqueta "LOST" |
 
-**Reglas de Negocio:**
+##### **Reglas de Negocio:**
 
 - RU-1:  La posición de un robot consiste en una coordenada en el mapa(formato x, y) y una orientación(norte, sur, este, oeste).
 - RU-2: La instrucción para un robot consiste en una cadena de caracteres formado por las letras: “L”,”R”, “F”.
@@ -41,9 +41,11 @@ Se compone de dos partes principales:
 - RU-6: El valor máximo de cualquier coordenada es 50
 - RU-7: Cualquier instrucción será de menos de 100 caracteres de longitud.
 - RU-8: El “output” estará compuesto por la posición final del robot y su orientación. Si el robot se pierde se imprimirá por pantalla la palabra “LOST”.
-- RU-9: El sistema debe ser extensible para que, en el caso de futuras implementaciones adicionales, no sea muy costosa su incorporación.
+- RU-9: El sistema debe ser extensible para que, en el caso de implementaciones adicionales, su incorporación no resulte costosa.
 
 
+##### 3. Diagrama de análisis:
+ 
 
 
 
