@@ -48,7 +48,7 @@ Se compone de dos partes principales:
  
 En la carpeta `/diagramas/Analisis`  
 
-
+#### 2. Diseño de la arquitectura
 ##### Diagrama de diseño:
 
 Se elige una arquitectura con un modelo multicapa. En concreto, de tres capas:
