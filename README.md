@@ -46,7 +46,22 @@ Se compone de dos partes principales:
 
 ##### Diagrama de análisis:
  
-En la carpeta ``
+En la carpeta `/diagramas/Analisis`  
+
+
+##### Diagrama de diseño:
+
+Se elige una arquitectura con un modelo multicapa. En concreto, de tres capas:
+
+- Interfaz
+- Lógica o de negocio
+- Persistencia
+
+En la carpeta `/diagramas/Disenyo`  
+
+Además, se incluye un boceto de una implementación con AWS:
+- Instancia `EC2`
+- Persistencia con `DynamoDB`
 
 
 
