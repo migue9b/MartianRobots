@@ -14,11 +14,11 @@ Se compone de dos partes principales:
 8. Deployment en nube (`AWS`).
 9. Planteamiento de ejecución serverless.
 
-## 2. Instrucciones para su ejecución
+## 2. Instrucciones para su ejecucion
 
 *-------------------------------------------------------------------------*
 
-## *1. Proceso de desarrollo*
+### *1. Proceso de desarrollo* 🧰
 
 #### 1. Especificación de requisitos y análisis
 ##### **Casos de Uso:**
@@ -33,7 +33,7 @@ Se compone de dos partes principales:
 
 ##### **Reglas de Negocio:**
 
-- RU-1:  La posición de un robot consiste en una coordenada en el mapa(formato x, y) y una orientación(norte, sur, este, oeste).
+- RU-1: La posición de un robot consiste en una coordenada en el mapa(formato x, y) y una orientación(norte, sur, este, oeste).
 - RU-2: La instrucción para un robot consiste en una cadena de caracteres formado por las letras: “L”,”R”, “F”.
 - RU-3: El mapa es rectangular y delimitado.
 - RU-4: Un robot que se mueve fuera de los límites es “perdido” para siempre.
@@ -65,4 +65,7 @@ Además, se incluye un boceto de una implementación con AWS:
 
 
 
+#### 3. Aproximación de implementación con `Python` y CLI.
 
+Se realiza una implementación en python para contruir el esqueleto de la aplicación. Para su ejecución se hace uso de la interfaz de comandos de cualquier SO.  
+En la sección de instrucciones se explica como [ejecutar](#2-instrucciones-para-su-ejecucion) esta aplicación.
