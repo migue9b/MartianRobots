@@ -2,6 +2,7 @@
 from functools import reduce
 import uuid
 from excepciones import *
+import copy
 
 
 class Orientacion:
@@ -27,7 +28,7 @@ class Ubicacion:
     x = int()
     y = int()
 
-    def __init__(self, x, y) -> None:
+    def __init__(self, x: int, y: int) -> None:
         self.x = x
         self.y = y
 
@@ -148,7 +149,7 @@ def robot_handler():
             if not check_orientation(o):
                 raise OrientationError
             return Robot(
-                (Ubicacion(x, y), Orientacion(parse_orientacion(o))), LOST=False
+                (Ubicacion(int(x), int(y)), Orientacion(parse_orientacion(o))), LOST=False
             )
         except (NumArgsError, CoordenateError, Max50ValueError, OrientationError) as e:
             print(e.__str__())
@@ -177,9 +178,24 @@ def instruccion_handler():
 
 
 def is_lost(mapa, robot):
-    return int(robot.posicion[0].x) > int(mapa.sup_dcha.x) or int(
-        robot.posicion[0].y
-    ) > int(mapa.sup_dcha.y)
+    rx = int(robot.posicion[0].x)
+    ry = int(robot.posicion[0].y)
+    mx = int(mapa.sup_dcha.x)
+    my = int(mapa.sup_dcha.y)
+    return rx > mx or ry > my or rx < 0 or ry < 0
+
+
+def print_robot(r1):
+    print(
+        "Posicion del robot:",
+        str(r1.posicion[0].x) + ",",
+        str(r1.posicion[0].y),
+        r1.posicion[1].orientacion,
+        end="",
+    )
+    if r1.LOST:
+        print(" LOST", end="")
+    print()
 
 
 def main():
@@ -188,8 +204,8 @@ def main():
     lost_robots = []
     while True:
         r1 = robot_handler()
+        robots_moves = [copy.deepcopy(r1)]
         i1 = instruccion_handler()
-        # ins_list = [i for i in dir(Instruccion) if not i.startswith("_")]
         for i in i1:
             if i == "FORWARD":
                 r1.move_forward()
@@ -197,11 +213,21 @@ def main():
                 r1.move_right()
             elif i == "LEFT":
                 r1.move_left()
-            if (r1.posicion[0].x, r1.posicion[0].y) not in lost_robots:
-                if is_lost(m1, r1):
+            aux = copy.deepcopy(r1)
+            # robots_moves.append(aux)
+            if is_lost(m1, r1):
+                x = int(robots_moves[-1].posicion[0].x)
+                y = int(robots_moves[-1].posicion[0].y)
+                if (x, y) not in lost_robots:
+                    r1 = copy.deepcopy(robots_moves[-1])
                     r1.LOST = True
-                    lost_robots.append((r1.posicion[0].x, r1.posicion[0].y))
+                    lost_robots.append((x, y))
                     break
+                else:
+                    r1 = copy.deepcopy(robots_moves[-1])
+                    # robots_moves = copy.deepcopy(robots_moves[:-1])
+            else:
+                robots_moves.append(aux)
 
         print(
             "Posicion del robot:",
@@ -213,6 +239,8 @@ def main():
         if r1.LOST:
             print(" LOST", end="")
         print()
+        print("-------")
+        print(lost_robots)
 
 
 if __name__ == "__main__":
