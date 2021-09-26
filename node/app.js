@@ -203,6 +203,21 @@ function main() {
 }
 
 if (require.main === module) {
+    let message = `
+
+    # ------------------------------------------------------------------
+    # [migue9b] Martian Robots
+    #
+    #
+    #    The surface of Mars can be modelled by a rectangular
+    #    grid around which robots are able to move according
+    #    to instructions provided from Earth
+    #
+    #
+    # URL: https://github.com/migue9b/MartianRobots
+    # ------------------------------------------------------------------
+    `
+    console.log(message)
     main();
     // let prueba = [[2, 3], [1, 2], [9, 6]]
     // console.log(prueba.includes([1, 2]))

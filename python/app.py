@@ -149,7 +149,8 @@ def robot_handler():
             if not check_orientation(o):
                 raise OrientationError
             return Robot(
-                (Ubicacion(int(x), int(y)), Orientacion(parse_orientacion(o))), LOST=False
+                (Ubicacion(int(x), int(y)), Orientacion(parse_orientacion(o))),
+                LOST=False,
             )
         except (NumArgsError, CoordenateError, Max50ValueError, OrientationError) as e:
             print(e.__str__())
@@ -244,4 +245,20 @@ def main():
 
 
 if __name__ == "__main__":
+    message = """
+    
+# ------------------------------------------------------------------
+# [migue9b] Martian Robots
+#          
+#
+#    The surface of Mars can be modelled by a rectangular 
+#    grid around which robots are able to move according 
+#    to instructions provided from Earth
+#    
+#
+# URL: https://github.com/migue9b/MartianRobots
+# ------------------------------------------------------------------
+
+"""
+    print(message)
     main()
