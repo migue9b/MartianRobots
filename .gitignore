@@ -77,6 +77,9 @@ typings/
 
 .idea/
 
+/node/package-lock.json
+/node/package.json
+
 
 
 
