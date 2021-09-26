@@ -69,3 +69,9 @@ Además, se incluye un boceto de una implementación con AWS:
 
 Se realiza una implementación en python para contruir el esqueleto de la aplicación. Para su ejecución se hace uso de la interfaz de comandos de cualquier SO.  
 En la sección de instrucciones se explica como [ejecutar](#2-instrucciones-para-su-ejecucion) esta aplicación.
+
+#### 4. Migración a Node.js
+
+La implementación realizada en python se pasa a JavaScript para `Node.js`.  
+Se optimiza para adaptarse a Node. Aspectos y características de Python tienen que ser "repensadas" para poder implementarse con JavaScript.  
+Además, se escriben tests con Jest para comprobar el correcto funcionamiento.
