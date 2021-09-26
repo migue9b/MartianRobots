@@ -124,14 +124,13 @@ function is_lost(mapa, robot) {
 }
 
 function print_robot(r1) {
-    process.stdout.write(
-        "Posicion del robot: " +
+    let message =
         r1.posicion[0].x.toString() + ", " +
         r1.posicion[0].y.toString() + " " +
         r1.posicion[1].orientacion
-    )
-    if (r1.LOST) process.stdout.write(" LOST")
-    console.log()
+
+    if (r1.LOST) message = message + " LOST"
+    return message
 }
 
 function in_lost_robots(arr1, lost_robots) {
@@ -142,31 +141,32 @@ function in_lost_robots(arr1, lost_robots) {
 }
 
 
-// function execution_handler(m1, r1, i1, robot_movements, lost_robots) {
-//     for (let i = 0; i < i1.length; i++) {
-//         if (i1[i] === "FORWARD") {
-//             r1.move_forward()
-//         } else if (i1[i] === "RIGHT") {
-//             r1.move_right()
-//         } else if (i1[i] === "LEFT") {
-//             r1.move_left()
-//         }
-//         let aux = JSON.parse(JSON.stringify(r1))
-//         if (is_lost(m1, r1)) {
-//             let y = parseInt(robot_movements[robot_movements.length - 1].posicion[0].y)
-//             let x = parseInt(robot_movements[robot_movements.length - 1].posicion[0].x)
-//             r1 = JSON.parse(JSON.stringify(robot_movements[robot_movements.length - 1]))
-//             if (!in_lost_robots([x, y], lost_robots)) {
-//                 r1.LOST = true
-//                 lost_robots.push([x, y])
-//                 break
-//             }
-//         } else {
-//             robot_movements.push(aux)
-//         }
-//     }
-//     print_robot(r1)
-// }
+function execution_handler(m1, r1, i1, robot_movements, lost_robots) {
+    for (let i = 0; i < i1.length; i++) {
+        if (i1[i] === "FORWARD") {
+            r1.move_forward()
+        } else if (i1[i] === "RIGHT") {
+            r1.move_right()
+        } else if (i1[i] === "LEFT") {
+            r1.move_left()
+        }
+        let aux = cloneDeep(r1)
+        if (is_lost(m1, r1)) {
+            let y = parseInt(robot_movements[robot_movements.length - 1].posicion[0].y)
+            let x = parseInt(robot_movements[robot_movements.length - 1].posicion[0].x)
+            r1 = cloneDeep(robot_movements[robot_movements.length - 1])
+            if (!in_lost_robots([x, y], lost_robots)) {
+                r1.LOST = true
+                lost_robots.push([x, y])
+                break
+            }
+        } else {
+            robot_movements.push(aux)
+        }
+    }
+    console.log(print_robot(r1))
+    return [r1, lost_robots]
+}
 
 function main() {
     let m1 = map_handler()
@@ -176,29 +176,8 @@ function main() {
         let r1 = robot_handler()
         let robot_movements = [cloneDeep(r1)]
         let i1 = instruccion_handler()
-        for (let i = 0; i < i1.length; i++) {
-            if (i1[i] === "FORWARD") {
-                r1.move_forward()
-            } else if (i1[i] === "RIGHT") {
-                r1.move_right()
-            } else if (i1[i] === "LEFT") {
-                r1.move_left()
-            }
-            let aux = cloneDeep(r1)
-            if (is_lost(m1, r1)) {
-                let y = parseInt(robot_movements[robot_movements.length - 1].posicion[0].y)
-                let x = parseInt(robot_movements[robot_movements.length - 1].posicion[0].x)
-                r1 = cloneDeep(robot_movements[robot_movements.length - 1])
-                if (!in_lost_robots([x, y], lost_robots)) {
-                    r1.LOST = true
-                    lost_robots.push([x, y])
-                    break
-                }
-            } else {
-                robot_movements.push(aux)
-            }
-        }
-        print_robot(r1)
+        console.log(i1)
+        lost_robots.concat(execution_handler(m1, r1, i1, robot_movements, lost_robots)[1])
     }
 }
 
@@ -219,18 +198,13 @@ if (require.main === module) {
     `
     console.log(message)
     main();
-    // let prueba = [[2, 3], [1, 2], [9, 6]]
-    // console.log(prueba.includes([1, 2]))
-    // // console.log(prueba.some([1, 2]))
-    // for (let i = 0; i < prueba.length; i++) {
-    //     if (JSON.stringify([1, 2]) === JSON.stringify(prueba[i])) console.log(prueba[i])
-    // }
+}
 
-    // let r1 = new Robot([new Ubicacion(3, 4), new Orientacion("ESTE")], false)
-    // let r2 = cloneDeep(r1)
-    // r1.move_forward()
-    // r2.LOST = true
-    // print_robot(r1)
-    // print_robot(r2)
+module.exports = {
+
+    execution_handler: execution_handler,
+    parse_instruccion: parse_instruccion,
+    parse_orientacion: parse_orientacion,
+    print_robot: print_robot
 
 }
