@@ -29,7 +29,6 @@ async function iniciar() {
         await database.MongoBot.init()
     });
     await database.MongoBot.client.close().then(console.log("Desconectado"))
-    // await main.main()
 }
 
 iniciar()
