@@ -49,7 +49,7 @@ Se compone de dos partes principales:
 Siguiendo los casos de uso y las principales reglas de diseño se modela el diagrama de clases.  
   
 
-![Analisis diagrama](diagramas\Analisis\clases.jpg "Analisis diagrma")   
+![Analisis diagrama](diagramas/Analisis/clases.jpg "Analisis diagrma")   
 
 #### 2. Diseño de la arquitectura
 ##### Diagrama de diseño:
@@ -60,13 +60,13 @@ Se elige una arquitectura con un modelo multicapa. En concreto, de tres capas:
 - Lógica o de negocio
 - Persistencia
 
-![3-layer](diagramas\Disenyo\3-capas.png "3-layer")
+![3-layer](diagramas/Disenyo/3-capas.png "3-layer")
 
 Además, se incluye un boceto de una implementación con AWS:
 - Instancia `EC2` para el despliegue de la API REST con el servidor de `Node.js`.
 - Instancia en `EC2` para el despliegue de la Base de Datos de `MongoDB`.
 
-![Cloudcraft Diagram](diagramas\Disenyo\MartianRobots_AWS.png "Cloudcraft Diagram")
+![Cloudcraft Diagram](diagramas/Disenyo/MartianRobots_AWS.png "Cloudcraft Diagram")
 
 
 
@@ -85,7 +85,7 @@ Además, se escriben tests con Jest para comprobar el correcto funcionamiento.
 
 La persistencia se implementa mediante el uso de base de datos No-SQL orientada a documentos. En concreto, con MongoDB.
 
-![Mongo Diagram](diagramas\database\database.png "Mongo Diagram")  
+![Mongo Diagram](diagramas/database/database.png "Mongo Diagram")  
   
 La BD es muy sencilla. Tan solo es necesaria una colección, donde se almacenan:
 - Id del robot (generado en tiempo de ejecución con uuid).
