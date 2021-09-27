@@ -9,8 +9,8 @@ Se compone de dos partes principales:
 3. Aproximación de implementación con `Python` y CLI.
 4. Migración a `Node.js`.
 5. Implementación de la persistencia.
-6. Contenerizar (`Docker`).
-7. Desplegar REST API.
+6. Desplegar REST API.
+7. Contenerizar (`Docker`).
 8. Deployment en nube (`AWS`).
 9. Planteamiento de ejecución serverless.
 

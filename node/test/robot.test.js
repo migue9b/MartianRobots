@@ -1,9 +1,9 @@
-const app = require('../src/app')
-const Mapa = require('../src/Mapa')
-const Robot = require('../src/Robot')
-const Instruccion = require('../src/Instruccion')
-const Ubicacion = require('../src/Ubicacion')
-const Orientacion = require("../src/Orientacion");
+const app = require('../src/logica/main')
+const Mapa = require('../src/logica/Mapa')
+const Robot = require('../src/logica/Robot')
+const Instruccion = require('../src/logica/Instruccion')
+const Ubicacion = require('../src/logica/Ubicacion')
+const Orientacion = require("../src/logica/Orientacion");
 const {cloneDeep} = require("lodash");
 
 

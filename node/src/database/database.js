@@ -23,6 +23,14 @@ class MongoBot {
             instrucciones: i1
         }).then(console.log("Robot añadido a la BD"))
     }
+
+    async getAllRobots() {
+        return await this.client.db().collection(collec).find({}).toArray()
+    }
+
+    async getLostRobots() {
+        return await this.client.db().collection(collec).find({"LOST": true}).toArray()
+    }
 }
 
 
