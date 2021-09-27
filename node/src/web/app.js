@@ -24,8 +24,9 @@ app.get('/robots/lost', async (req, res) => {
 
 
 async function iniciar() {
-    app.listen(8001, async function () {
-        console.log("Servidor de Node.js levantado en http://localhost:8001");
+    const port = 80
+    app.listen(port, async function () {
+        console.log("Servidor de Node.js levantado en http://localhost:" + port);
         await database.MongoBot.init()
     });
     await database.MongoBot.client.close().then(console.log("Desconectado"))

@@ -1,6 +1,7 @@
 const db = "robots"
 const collec = "robots"
-const url = "mongodb://localhost:27017/" + db
+//cambiar por url local en caso de un despliegue en local.
+const url = "mongodb://ec2-15-188-213-123.eu-west-3.compute.amazonaws.com:27017/" + db
 const {MongoClient} = require('mongodb');
 
 
