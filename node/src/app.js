@@ -6,6 +6,7 @@ const Mapa = require("./Mapa")
 const Excepcion = require("./excepciones")
 const prompt = require('prompt-sync')();
 const {cloneDeep} = require('lodash');
+const database = require("./database/database")
 
 
 function parser(object, value) {
@@ -35,7 +36,7 @@ function are_integers(x, y) {
 
 function check_num_args(args, num) {
     args = args.split(" ")
-    return args.length === num
+    return args.length === num && args[0] !== ''
 }
 
 function map_handler() {
@@ -168,7 +169,7 @@ function execution_handler(m1, r1, i1, robot_movements, lost_robots) {
     return [r1, lost_robots]
 }
 
-function main() {
+async function main() {
     let m1 = map_handler()
     let lost_robots = []
     while (true) {
@@ -176,10 +177,12 @@ function main() {
         let r1 = robot_handler()
         let robot_movements = [cloneDeep(r1)]
         let i1 = instruccion_handler()
-        console.log(i1)
-        lost_robots.concat(execution_handler(m1, r1, i1, robot_movements, lost_robots)[1])
+        let aux_exec = execution_handler(m1, r1, i1, robot_movements, lost_robots)
+        lost_robots.concat(aux_exec[1])
+        await database.MongoBot.addRobot(aux_exec[0], i1)
     }
 }
+
 
 if (require.main === module) {
     let message = `
@@ -197,7 +200,14 @@ if (require.main === module) {
     # ------------------------------------------------------------------
     `
     console.log(message)
-    main();
+
+    async function iniciar() {
+        await database.MongoBot.init()
+        await main()
+        await database.MongoBot.client.close().then(console.log("Desconectado"))
+    }
+
+    iniciar()
 }
 
 module.exports = {
