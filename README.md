@@ -2,7 +2,7 @@
 
 Este programa determina cada posición de los robots introducidos y su posición final.  
 Se compone de dos partes principales:
-- 1 - **Proceso de desarrollo**:
+- 1 - **[Proceso](#1-proceso-de-desarrollo-🧰) de desarrollo**:
 
 1. Especificación de requisitos y análisis.
 2. Diseño de la arquitectura.
@@ -14,7 +14,7 @@ Se compone de dos partes principales:
 8. Deployment en nube (`AWS`).
 9. Planteamiento de ejecución serverless.
 
-- 2 - **Instrucciones para su ejecucion**
+- 2 - **[Instrucciones](#2-instrucciones-para-su-ejecucion-⬇) para su ejecucion**
 
 *-------------------------------------------------------------------------*
 
@@ -73,7 +73,7 @@ Además, se incluye un boceto de una implementación con AWS:
 #### 3. Aproximación de implementación con `Python` y CLI.
 
 Se realiza una implementación en python para contruir el esqueleto de la aplicación. Para su ejecución se hace uso de la interfaz de comandos de cualquier SO.  
-En la sección de instrucciones se explica como [ejecutar](#2-instrucciones-para-su-ejecucion) esta aplicación.
+En la sección de instrucciones se explica como [ejecutar](#1-ejecucion-en-python) esta aplicación.
 
 #### 4. Migración a `Node.js`
 
@@ -93,9 +93,9 @@ La BD es muy sencilla. Tan solo es necesaria una colección, donde se almacenan:
 - Un valor booleano que determina si el robot se ha perdido.
 - El set de instrucciones asociado a ese robot.
 
-#### 6. Desplegar API REST.
+#### 6. Desplegar API REST
 
-Con el objetivo de proveer una mayor interfaz de acceso y visualización de los datos, se implementa una API. Sin embargo, está en fase inicial; y solo permite la consulta de los robots existentes y los que están perdidos. El funcionamiento es explicado en la [sección](#2-instrucciones-para-su-ejecucion) de instrucciones de ejecución.  
+Con el objetivo de proveer una mayor interfaz de acceso y visualización de los datos, se implementa una API. Sin embargo, está en fase inicial; y solo permite la consulta de los robots existentes y los que están perdidos. El funcionamiento es explicado en la [sección](#2-ejecucion-de-la-segunda-version) de instrucciones de ejecución.  
 Para crear una API de forma rápida se hace uso del framework `express`.  
 Se implementan dos rutas:
 - GET /robots --> devuelve todos los robots en la BD.
@@ -128,5 +128,77 @@ Cada una de las funciones se encargaría de procesar:
 - GET robots
 
 
-## *2. Instrucciones para su ejecucion* 🧰
+## 2. *Instrucciones para su ejecucion* ⬇
+
+### 1. Ejecución de la primera `Release: v1.0`
+
+Para ejecutar la primera versión de la aplicación simplemente se descarga el `.zip` de la release.  
+Hay dos versiones:
+- Python
+- Node.js
+
+#### 1. Ejecucion en python
+
+En la carpeta `python` del proyecto:
+
+        python3 app.py
+
+#### 2. Ejecucion en Node
+
+En la carpeta `node/src`
+
+      node app.js
+
+
+### 2. Ejecucion de la segunda version
+
+Para la segunda versión se amplía la primera release con soporte API y persistencia.  
+Es decir, la aplicación se compone de:
+- "Núcleo" lógico: formado por la aplicación en la línea de comandos, que almacena  
+la información necesaria de los robots.
+- Interfaz de acceso de datos: conformado por la API REST, que proporciona la consulta  
+de los robots.
+
+Por lo tanto, el esquema de ejecución para esta versión final de la app sería:  
+
+
+El usuario ejecuta e interactúa con la aplicación desde CLI. Por cada robot e instrucciones  
+que introduce, éstas son almacenadas en la BD.  
+Si el usuario quisiera ver información acerca de los robots o filtrar los robots perdidos,  
+puede hacer uso de la API. Es importante destacar que el registro de las posiciones de  
+los robots perdidos(que sirve para evitar la pérdida de los demás robots en esa posición)  
+se realiza en tiempo de ejecución. Por tanto, si, históricamente, ya hay un robot perdido  
+en la BD; cuando se interaccione con la app, esa posición no será tomada en cuenta.  
+En resumen, la aplicación no precarga ningún dato de la BD.  
+
+
+Hay dos opciones para "usar" la app:
+
+#### 1. Ejecucion con despliegue en la nube
+
+Es la opción por defecto y la más cómoda.  
+Para ello, se descarga el `.zip` de la release final y se ejecuta, sobre la ruta `node/src/logica/`
+    
+    node main.js
+
+Los datos son almacenados en una BD desplegada en una instancia de EC2 de AWS.  
+Si se desea acceder a los datos, seguir las [rutas](#6-desplegar-api-rest) en la URL:  
+ec2-13-37-163-6.eu-west-3.compute.amazonaws.com
+
+#### 2. Ejecucion con despliegue en local
+
+Si se desea usar la app en local:
+1. Descargar el `.zip` de la release final
+2. Modificar la URL de la BD. Al ser en local, la BD ya no se encuentra en remoto. Para ello, basta con  
+cambiarla al valor por defecto en el archivo `node/src/database/database.js`:  
+`mongodb://localhost:27017/`
+3. Desplegar los contenedores con `docker-compose`. Sobre la carpeta raíz del proyecto,  
+`docker-compose up -d`  
+En caso de error: `docker-compose up -d --force-recreate`
+
+Tras esto, se habrán desplegado la API REST y la BD. Por tanto, el paso final es ejecutar la parte de CLI:  
+Sobre la ruta `node/src/logica/`
+
+    node main.js
+
 
