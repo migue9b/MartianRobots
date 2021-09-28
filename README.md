@@ -2,7 +2,7 @@
 
 Este programa determina cada posición de los robots introducidos y su posición final.  
 Se compone de dos partes principales:
-- 1 - **[Proceso](#1-proceso-de-desarrollo-🧰) de desarrollo**:
+- 1 - **[Proceso](#1-proceso-de-desarrollo-) de desarrollo**:
 
 1. Especificación de requisitos y análisis.
 2. Diseño de la arquitectura.
@@ -14,7 +14,7 @@ Se compone de dos partes principales:
 8. Deployment en nube (`AWS`).
 9. Planteamiento de ejecución serverless.
 
-- 2 - **[Instrucciones](#2-instrucciones-para-su-ejecucion-⬇) para su ejecucion**
+- 2 - **[Instrucciones](#2-instrucciones-para-su-ejecucion-) para su ejecucion**
 
 *-------------------------------------------------------------------------*
 
@@ -167,7 +167,7 @@ que introduce, éstas son almacenadas en la BD.
 Si el usuario quisiera ver información acerca de los robots o filtrar los robots perdidos,  
 puede hacer uso de la API. Es importante destacar que el registro de las posiciones de  
 los robots perdidos(que sirve para evitar la pérdida de los demás robots en esa posición)  
-se realiza en tiempo de ejecución. Por tanto, si, históricamente, ya hay un robot perdido  
+se realiza en tiempo de ejecución. Por tanto, si, históricamente ya hay un robot perdido  
 en la BD; cuando se interaccione con la app, esa posición no será tomada en cuenta.  
 En resumen, la aplicación no precarga ningún dato de la BD.  
 
@@ -177,13 +177,17 @@ Hay dos opciones para "usar" la app:
 #### 1. Ejecucion con despliegue en la nube
 
 Es la opción por defecto y la más cómoda.  
-Para ello, se descarga el `.zip` de la release final y se ejecuta, sobre la ruta `node/src/logica/`
+Para ello, se descarga el `.zip` de la release final y se ejecuta, sobre la ruta raíz:
     
+    npm install
+
+Tras ello, sobre la carpeta `node/src/logica/`:
+
     node main.js
 
 Los datos son almacenados en una BD desplegada en una instancia de EC2 de AWS.  
 Si se desea acceder a los datos, seguir las [rutas](#6-desplegar-api-rest) en la URL:  
-ec2-13-37-163-6.eu-west-3.compute.amazonaws.com
+http://ec2-13-37-163-6.eu-west-3.compute.amazonaws.com
 
 #### 2. Ejecucion con despliegue en local
 
@@ -197,8 +201,13 @@ cambiarla al valor por defecto en el archivo `node/src/database/database.js`:
 En caso de error: `docker-compose up -d --force-recreate`
 
 Tras esto, se habrán desplegado la API REST y la BD. Por tanto, el paso final es ejecutar la parte de CLI:  
-Sobre la ruta `node/src/logica/`
+En la ruta raíz:
+    
+    npm install
+
+Tras ello, sobre la carpeta `node/src/logica/`:
 
     node main.js
+
 
 
