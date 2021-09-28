@@ -2,7 +2,7 @@
 
 Este programa determina cada posición de los robots introducidos y su posición final.  
 Se compone de dos partes principales:
-## 1. Proceso de desarrollo
+- 1 - **Proceso de desarrollo**:
 
 1. Especificación de requisitos y análisis.
 2. Diseño de la arquitectura.
@@ -14,11 +14,11 @@ Se compone de dos partes principales:
 8. Deployment en nube (`AWS`).
 9. Planteamiento de ejecución serverless.
 
-## 2. Instrucciones para su ejecucion
+- 2 - **Instrucciones para su ejecucion**
 
 *-------------------------------------------------------------------------*
 
-### *1. Proceso de desarrollo* 🧰
+## *1. Proceso de desarrollo* 🧰
 
 #### 1. Especificación de requisitos y análisis
 ##### **Casos de Uso:**
@@ -52,7 +52,7 @@ Siguiendo los casos de uso y las principales reglas de diseño se modela el diag
 ![Analisis diagrama](diagramas/Analisis/clases.jpg "Analisis diagrma")   
 
 #### 2. Diseño de la arquitectura
-##### Diagrama de diseño:
+##### Diagrama de disenyo:
 
 Se elige una arquitectura con un modelo multicapa. En concreto, de tres capas:
 
@@ -100,3 +100,33 @@ Para crear una API de forma rápida se hace uso del framework `express`.
 Se implementan dos rutas:
 - GET /robots --> devuelve todos los robots en la BD.
 - GET /robots/lost --> devuelve los robots perdidos. 
+
+#### 7. Contenerizar (`Docker`).
+
+Una vez terminada la API, se contenerizan los servicios para una mayor comodidad de uso y despliegue. Para ello se usan dos contenedores:
+- API REST container: se compila una imagen de contenedor con Dockerfile ==> `migue9b/martian-api:1.0`  
+  🐳 https://hub.docker.com/r/migue9b/martian-api 🐳
+- MongoDB database container: se usa la propia imagen de `mongo:5.0.3`
+
+#### 8. Despliegue en nube `AWS`
+
+Los contenedores se despliegan en nube. En concreto, en AWS. Cada contenedor se implementa en una instancia EC2(`Elastic Compute`); y cada instancia se lanza en una AZ(zona de disponibilidad de AWS) distinta.  
+Están bajo la misma red, pero en subredes distintas. En el [diagrama](#diagrama-de-disenyo) de diseño se puede apreciar.
+
+#### 9. Planteamiento serverless.
+
+A continuación se plantea un modelo de arquitectura serverless. Es decir, sin necesidad de un servidor. En concreto, con una página HTML estática que tenga una serie de opciones; un "almacén" para ese HTML; y unas funciones lambda.  
+  
+![serverless Diagram](diagramas/Serverless-MartianRobots.png "serverless Diagram") 
+
+**USER** --> **HTML** --> **API REQUEST** --> **LAMBDA FUNCTION** 
+
+Cada una de las funciones se encargaría de procesar:
+- Coordenadas de Mapa
+- Posicion y orientación del robot
+- Instrucciones
+- GET robots
+
+
+## *2. Instrucciones para su ejecucion* 🧰
+
