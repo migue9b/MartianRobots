@@ -87,14 +87,15 @@ function robot_handler() {
 }
 
 function check_instructions(instrucciones) {
-    let act_ins = Object.keys(new Instruccion()).filter(function (e) {
+    if (instrucciones.length >= 100) return false
+    let actual_inst = Object.keys(new Instruccion()).filter(function (e) {
         return e.charAt(0) === e.charAt(0).toUpperCase()
     })
-    act_ins = act_ins.map(function (e) {
+    actual_inst = actual_inst.map(function (e) {
         return e.charAt(0)
     })
     for (let i = 0; i < instrucciones.length; i++) {
-        if (!act_ins.includes(instrucciones.charAt(i))) {
+        if (!actual_inst.includes(instrucciones.charAt(i))) {
             return false
         }
     }
@@ -143,14 +144,9 @@ function in_lost_robots(arr1, lost_robots) {
 
 
 function execution_handler(m1, r1, i1, robot_movements, lost_robots) {
+    let handler = new Map(Object.entries(Instruccion.inst_method))
     for (let i = 0; i < i1.length; i++) {
-        if (i1[i] === "FORWARD") {
-            r1.move_forward()
-        } else if (i1[i] === "RIGHT") {
-            r1.move_right()
-        } else if (i1[i] === "LEFT") {
-            r1.move_left()
-        }
+        eval("r1." + handler.get(i1[i]))
         let aux = cloneDeep(r1)
         if (is_lost(m1, r1)) {
             let y = parseInt(robot_movements[robot_movements.length - 1].posicion[0].y)
@@ -215,7 +211,6 @@ module.exports = {
     execution_handler: execution_handler,
     parse_instruccion: parse_instruccion,
     parse_orientacion: parse_orientacion,
-    print_robot: print_robot,
-    main: main
+    print_robot: print_robot
 
 }

@@ -53,7 +53,7 @@ class InstruccError extends Error {
     constructor() {
         super();
         this.message = "Las instrucciones introducidas son incorrectas. " +
-            "Solo se aceptan letras que referencien a instrucciones implementadas."
+            "Solo se aceptan letras que referencien a instrucciones implementadas y menos de 100 caracteres."
     }
 
     toString() {
