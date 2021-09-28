@@ -200,7 +200,7 @@ cambiarla al valor por defecto en el archivo `node/src/database/database.js`:
 `docker-compose up -d`  
 En caso de error: `docker-compose up -d --force-recreate`
 
-Tras esto, se habrán desplegado la API REST y la BD. Por tanto, el paso final es ejecutar la parte de CLI:  
+Tras esto, se habrán desplegado la API REST(en `localhost`) y la BD. Por tanto, el paso final es ejecutar la parte de CLI:  
 En la ruta raíz:
     
     npm install
